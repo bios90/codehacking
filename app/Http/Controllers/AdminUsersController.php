@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UsersRequest;
+use App\Photo;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 
+
 use App\Http\Requests;
+use Illuminate\Support\Facades\Hash;
+use Rych\Random\Random;
 
 class AdminUsersController extends Controller
 {
@@ -42,14 +46,22 @@ class AdminUsersController extends Controller
      */
     public function store(UsersRequest $request)
     {
+        $input = $request->all();
 
-        if($request->hasFile('file'))
+        if($file = $request->file('photo_id'))
         {
+            $random = new Random();
+            $str = $random->getRandomString(8);
+            $name = time().$str.$file->getClientOriginalName();
 
+            $file->move('images',$name);
+            $photo = Photo::create(['file'=>$name]);
+            $input['photo_id']=$photo->id;
         }
-        return $request->all();
-//        User::create($request->all());
-//        return redirect('/admin/users');
+
+        $input['password']= bcrypt($request->password);
+        User::create($input);
+        return redirect('/admin/users');
     }
 
     /**

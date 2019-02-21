@@ -28,4 +28,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Role','role_id','id');
     }
+
+    public function photo()
+    {
+        return $this->hasOne('App\Photo','photo_id','id');
+    }
 }
