@@ -8,8 +8,9 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th>id</th>
+                <th>Photo</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
                 <th>Status</th>
@@ -26,7 +27,8 @@
 
                     <tr>
                         <td>{{$user->id}}</td>
-                        <td>{{$user->name}}</td>
+                        <td class="text-center"><img height="32" src="{{ $user->photo ? $user->photo->file : "https://picsum.photos/200/?random"}}"></td>
+                        <td><a href="{{route('admin.users.edit',['users'=>$user->id])}}">{{$user->name}}</a></td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->role->name}}</td>
                         <td>{{$user->is_active == 1 ? 'Active' : 'Not active'}}</td>
