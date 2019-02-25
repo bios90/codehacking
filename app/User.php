@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -32,5 +33,19 @@ class User extends Authenticatable
     public function photo()
     {
         return $this->hasOne('App\Photo','id','photo_id');
+    }
+
+    public function isAdmin()
+    {
+        if($this->role->id == 1 && $this->is_active == 1)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public function posts()
+    {
+        return $this->hasMany('App\Post','user_id','id');
     }
 }

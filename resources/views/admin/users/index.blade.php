@@ -3,8 +3,14 @@
 
 @section('content')
 
+    @if(Session::has('deleted_user'))
+
+    <p class="bg-danger">{{session('deleted_user')}}</p>
+
+    @endif
+
     <h1>Users</h1>
-    <div class="table-responsive">
+
         <table class="table table-striped">
             <thead>
             <tr>
@@ -27,7 +33,9 @@
 
                     <tr>
                         <td>{{$user->id}}</td>
-                        <td class="text-center"><img height="32" src="{{ $user->photo ? $user->photo->file : "https://picsum.photos/200/?random"}}"></td>
+                        <td class="text-center"><img height="32"
+                                                     src="{{ $user->photo ? $user->photo->file : "https://picsum.photos/200/?random"}}">
+                        </td>
                         <td><a href="{{route('admin.users.edit',['users'=>$user->id])}}">{{$user->name}}</a></td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->role->name}}</td>

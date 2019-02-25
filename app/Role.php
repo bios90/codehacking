@@ -10,4 +10,9 @@ class Role extends Model
     {
         return ucfirst($value);
     }
+
+    protected $fillable =
+        [
+            'name'
+        ];
 }
