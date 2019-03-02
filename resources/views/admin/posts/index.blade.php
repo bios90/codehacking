@@ -27,7 +27,7 @@
                     <tr>
                         <td>{{$post->id}}</td>
                         <td>{{$post->user->name}}</td>
-                        <td>{{$post->category_id}}</td>
+                        <td>{{$post->category ? $post->category->name : "Uncategorized"}}</td>
                         {{--@if($post->photo->id)--}}
                             {{--<td class="text-center"><img height="32" src="{{ $post->photo->file}}"></td>--}}
                         {{--@else--}}
