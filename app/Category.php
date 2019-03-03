@@ -10,4 +10,10 @@ class Category extends Model
         [
             'name'
         ];
+
+    //Todo Check if will have conflicts
+    public function getNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
 }

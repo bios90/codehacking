@@ -2,6 +2,12 @@
 
 @section('content')
 
+    @if(Session::has('deleted_post'))
+
+        <p class="bg-danger">{{session('deleted_post')}}</p>
+
+    @endif
+
     <h1>Posts</h1>
 
     <div class="table-responsive">
@@ -35,8 +41,9 @@
                         {{--@endif--}}
                         <td><img height="32" src="{{$post->photo ? $post->photo->file : "https://picsum.photos/200/?random&dummy=32525"}}" alt=""></td>
                         <td>{{$post->photo->id}}</td>
-                        <td>{{$post->title}}</td>
-                        <td>{{$post->body}}</td>
+                        {{--<td>{{$post->title}}</td>--}}
+                        <td><a href="{{route('admin.posts.edit',['posts'=>$post->id])}}">{{$post->title}}</a></td>
+                        <td>{{str_limit($post->body,50)}}</td>
                         <td>{{$post->created_at->diffForHumans()}}</td>
                         <td>{{$post->updated_at->diffForHumans()}}</td>
                     </tr>
