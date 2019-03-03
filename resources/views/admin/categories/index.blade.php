@@ -41,7 +41,7 @@
 
                     <tr>
                         <td>{{$category->id}}</td>
-                        <td>{{$category->name}}</td>
+                        <td><a href="{{route('admin.categories.edit',['categories'=>$category->id])}}">{{$category->name}}</a></td>
                         <td>{{$category->created_at ? $category->created_at->diffForHumans():'no date'}}</td>
                     </tr>
 
