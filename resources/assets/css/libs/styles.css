@@ -35,3 +35,13 @@
 .toppad
 {margin-top:20px;
 }
+
+.nested-comment
+{
+    margin-top: 28px;
+}
+
+.comment-reply
+{
+    display: none;
+}

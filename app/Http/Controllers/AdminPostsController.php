@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class AdminPostsController extends Controller
 {
@@ -21,7 +22,7 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        $posts =  Post::all();
+        $posts =  Post::paginate(2);
         return view('admin.posts.index',compact('posts'));
     }
 
@@ -129,6 +130,13 @@ class AdminPostsController extends Controller
         }
         Session::flash('deleted_post','The post has been deleted');
         return redirect(route('admin.posts.index'));
+    }
 
+
+    public function post($slug)
+    {
+        $post = Post::findBySlug($slug);
+        $comments = $post->comments()->whereIsActive(1)->get();
+        return view('post', compact('post','comments'));
     }
 }
